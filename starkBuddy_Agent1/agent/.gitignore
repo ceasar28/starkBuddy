@@ -2,8 +2,7 @@
 !index.ts
 !character.ts
 !mainCharacter.ts
-!skynetCharacter.ts
-!modeMINDCharacter.ts
+!starkBuddy_Character.ts
 .env
 *.env
 .env*
