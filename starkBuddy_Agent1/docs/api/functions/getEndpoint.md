@@ -14,4 +14,4 @@
 
 ## Defined in
 
-packages/core/src/models.ts:385
+[packages/core/src/models.ts:385](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/models.ts#L385)

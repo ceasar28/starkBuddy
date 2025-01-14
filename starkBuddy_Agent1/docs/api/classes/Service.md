@@ -36,7 +36,7 @@
 
 #### Defined in
 
-packages/core/src/types.ts:957
+[packages/core/src/types.ts:957](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L957)
 
 ***
 
@@ -52,7 +52,7 @@ packages/core/src/types.ts:957
 
 #### Defined in
 
-packages/core/src/types.ts:968
+[packages/core/src/types.ts:968](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L968)
 
 ## Methods
 
@@ -70,7 +70,7 @@ packages/core/src/types.ts:968
 
 #### Defined in
 
-packages/core/src/types.ts:961
+[packages/core/src/types.ts:961](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L961)
 
 ***
 
@@ -90,4 +90,4 @@ Add abstract initialize method that must be implemented by derived classes
 
 #### Defined in
 
-packages/core/src/types.ts:973
+[packages/core/src/types.ts:973](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L973)

@@ -6,4 +6,4 @@
 
 ## Defined in
 
-packages/core/src/logger.ts:267
+[packages/core/src/logger.ts:267](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/logger.ts#L267)

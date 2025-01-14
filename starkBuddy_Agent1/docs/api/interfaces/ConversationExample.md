@@ -14,7 +14,7 @@ UUID of user in conversation
 
 #### Defined in
 
-packages/core/src/types.ts:50
+[packages/core/src/types.ts:50](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L50)
 
 ***
 
@@ -26,4 +26,4 @@ Content of the conversation
 
 #### Defined in
 
-packages/core/src/types.ts:53
+[packages/core/src/types.ts:53](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L53)

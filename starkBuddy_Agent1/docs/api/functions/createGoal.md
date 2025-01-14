@@ -18,4 +18,4 @@
 
 ## Defined in
 
-packages/core/src/goals.ts:55
+[packages/core/src/goals.ts:55](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/goals.ts#L55)

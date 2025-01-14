@@ -32,4 +32,4 @@ The completed message.
 
 ## Defined in
 
-packages/core/src/generation.ts:51
+[packages/core/src/generation.ts:51](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/generation.ts#L51)

@@ -12,4 +12,4 @@ Validation function
 
 ## Defined in
 
-packages/core/src/environment.ts:26
+[packages/core/src/environment.ts:26](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/environment.ts#L26)

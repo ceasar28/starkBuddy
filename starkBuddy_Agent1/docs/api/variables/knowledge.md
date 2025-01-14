@@ -52,4 +52,4 @@
 
 ## Defined in
 
-packages/core/src/knowledge.ts:150
+[packages/core/src/knowledge.ts:150](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/knowledge.ts#L150)

@@ -20,4 +20,4 @@
 
 ## Defined in
 
-packages/core/src/generation.ts:711
+[packages/core/src/generation.ts:711](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/generation.ts#L711)

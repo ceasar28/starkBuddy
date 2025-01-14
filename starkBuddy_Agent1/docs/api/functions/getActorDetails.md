@@ -20,4 +20,4 @@ Get details for a list of actors.
 
 ## Defined in
 
-packages/core/src/messages.ts:12
+[packages/core/src/messages.ts:12](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/messages.ts#L12)

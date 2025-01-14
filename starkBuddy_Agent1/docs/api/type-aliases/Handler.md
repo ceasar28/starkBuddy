@@ -24,4 +24,4 @@ Handler function type for processing messages
 
 ## Defined in
 
-packages/core/src/types.ts:366
+[packages/core/src/types.ts:366](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L366)

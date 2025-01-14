@@ -14,7 +14,7 @@ Unique identifier
 
 #### Defined in
 
-packages/core/src/types.ts:471
+[packages/core/src/types.ts:471](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L471)
 
 ***
 
@@ -26,7 +26,7 @@ First user ID
 
 #### Defined in
 
-packages/core/src/types.ts:474
+[packages/core/src/types.ts:474](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L474)
 
 ***
 
@@ -38,7 +38,7 @@ Second user ID
 
 #### Defined in
 
-packages/core/src/types.ts:477
+[packages/core/src/types.ts:477](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L477)
 
 ***
 
@@ -50,7 +50,7 @@ Primary user ID
 
 #### Defined in
 
-packages/core/src/types.ts:480
+[packages/core/src/types.ts:480](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L480)
 
 ***
 
@@ -62,7 +62,7 @@ Associated room ID
 
 #### Defined in
 
-packages/core/src/types.ts:483
+[packages/core/src/types.ts:483](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L483)
 
 ***
 
@@ -74,7 +74,7 @@ Relationship status
 
 #### Defined in
 
-packages/core/src/types.ts:486
+[packages/core/src/types.ts:486](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L486)
 
 ***
 
@@ -86,4 +86,4 @@ Optional creation timestamp
 
 #### Defined in
 
-packages/core/src/types.ts:489
+[packages/core/src/types.ts:489](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L489)

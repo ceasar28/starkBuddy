@@ -22,4 +22,4 @@ string
 
 ## Defined in
 
-packages/core/src/messages.ts:60
+[packages/core/src/messages.ts:60](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/messages.ts#L60)

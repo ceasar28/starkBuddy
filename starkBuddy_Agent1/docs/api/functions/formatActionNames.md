@@ -20,4 +20,4 @@ A comma-separated string of action names.
 
 ## Defined in
 
-packages/core/src/actions.ts:47
+[packages/core/src/actions.ts:47](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/actions.ts#L47)

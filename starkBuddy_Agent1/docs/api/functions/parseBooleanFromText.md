@@ -14,4 +14,4 @@
 
 ## Defined in
 
-packages/core/src/parsing.ts:36
+[packages/core/src/parsing.ts:36](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/parsing.ts#L36)

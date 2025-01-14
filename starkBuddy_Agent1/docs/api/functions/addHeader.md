@@ -39,4 +39,4 @@ const text = addHeader(header, body);
 
 ## Defined in
 
-packages/core/src/context.ts:58
+[packages/core/src/context.ts:58](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/context.ts#L58)

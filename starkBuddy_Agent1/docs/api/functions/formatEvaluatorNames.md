@@ -20,4 +20,4 @@ A string that concatenates the names of all evaluators, each enclosed in single 
 
 ## Defined in
 
-packages/core/src/evaluators.ts:30
+[packages/core/src/evaluators.ts:30](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/evaluators.ts#L30)

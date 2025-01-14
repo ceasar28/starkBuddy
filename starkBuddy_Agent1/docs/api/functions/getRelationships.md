@@ -18,4 +18,4 @@
 
 ## Defined in
 
-packages/core/src/relationships.ts:33
+[packages/core/src/relationships.ts:33](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/relationships.ts#L33)

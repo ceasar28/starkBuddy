@@ -8,4 +8,4 @@ Initialize settings based on environment
 
 ## Defined in
 
-packages/core/src/settings.ts:126
+[packages/core/src/settings.ts:126](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/settings.ts#L126)

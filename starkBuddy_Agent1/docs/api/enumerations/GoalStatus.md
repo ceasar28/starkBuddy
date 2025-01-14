@@ -12,7 +12,7 @@ Status enum for goals
 
 #### Defined in
 
-packages/core/src/types.ts:100
+[packages/core/src/types.ts:100](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L100)
 
 ***
 
@@ -22,7 +22,7 @@ packages/core/src/types.ts:100
 
 #### Defined in
 
-packages/core/src/types.ts:101
+[packages/core/src/types.ts:101](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L101)
 
 ***
 
@@ -32,4 +32,4 @@ packages/core/src/types.ts:101
 
 #### Defined in
 
-packages/core/src/types.ts:102
+[packages/core/src/types.ts:102](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L102)

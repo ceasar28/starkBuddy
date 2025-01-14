@@ -20,4 +20,4 @@ True if the environment variable exists
 
 ## Defined in
 
-packages/core/src/settings.ts:118
+[packages/core/src/settings.ts:118](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/settings.ts#L118)

@@ -20,4 +20,4 @@ Configuration options specific to the provider.
 
 ## Defined in
 
-packages/core/src/generation.ts:1173
+[packages/core/src/generation.ts:1173](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/generation.ts#L1173)

@@ -14,7 +14,7 @@ Display name
 
 #### Defined in
 
-packages/core/src/types.ts:61
+[packages/core/src/types.ts:61](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L61)
 
 ***
 
@@ -26,7 +26,7 @@ Username/handle
 
 #### Defined in
 
-packages/core/src/types.ts:64
+[packages/core/src/types.ts:64](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L64)
 
 ***
 
@@ -56,7 +56,7 @@ Favorite quote
 
 #### Defined in
 
-packages/core/src/types.ts:67
+[packages/core/src/types.ts:67](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L67)
 
 ***
 
@@ -68,4 +68,4 @@ Unique identifier
 
 #### Defined in
 
-packages/core/src/types.ts:79
+[packages/core/src/types.ts:79](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L79)

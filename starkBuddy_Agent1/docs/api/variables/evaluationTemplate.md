@@ -8,4 +8,4 @@ Template used for the evaluation generateText.
 
 ## Defined in
 
-packages/core/src/evaluators.ts:8
+[packages/core/src/evaluators.ts:8](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/evaluators.ts#L8)

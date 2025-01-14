@@ -100,4 +100,4 @@ Model names by size class
 
 ## Defined in
 
-packages/core/src/types.ts:142
+[packages/core/src/types.ts:142](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L142)

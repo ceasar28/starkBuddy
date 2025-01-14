@@ -28,4 +28,4 @@ Promise resolving to a boolean value parsed from the model's response
 
 ## Defined in
 
-packages/core/src/generation.ts:584
+[packages/core/src/generation.ts:584](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/generation.ts#L584)

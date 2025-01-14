@@ -16,4 +16,4 @@
 
 ## Defined in
 
-packages/core/src/generation.ts:1022
+[packages/core/src/generation.ts:1022](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/generation.ts#L1022)

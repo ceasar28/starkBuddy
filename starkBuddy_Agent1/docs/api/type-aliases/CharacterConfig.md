@@ -8,4 +8,4 @@ Type inference
 
 ## Defined in
 
-packages/core/src/environment.ts:130
+[packages/core/src/environment.ts:130](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/environment.ts#L130)

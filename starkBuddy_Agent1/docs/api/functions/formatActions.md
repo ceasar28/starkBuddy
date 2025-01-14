@@ -20,4 +20,4 @@ A detailed string of actions, including names and descriptions.
 
 ## Defined in
 
-packages/core/src/actions.ts:59
+[packages/core/src/actions.ts:59](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/actions.ts#L59)

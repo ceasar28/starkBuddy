@@ -14,7 +14,7 @@ Database instance
 
 #### Defined in
 
-packages/core/src/types.ts:740
+[packages/core/src/types.ts:740](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L740)
 
 ## Methods
 
@@ -30,7 +30,7 @@ Optional initialization
 
 #### Defined in
 
-packages/core/src/types.ts:743
+[packages/core/src/types.ts:743](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L743)
 
 ***
 
@@ -46,7 +46,7 @@ Close database connection
 
 #### Defined in
 
-packages/core/src/types.ts:746
+[packages/core/src/types.ts:746](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L746)
 
 ***
 
@@ -66,7 +66,7 @@ Get account by ID
 
 #### Defined in
 
-packages/core/src/types.ts:749
+[packages/core/src/types.ts:749](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L749)
 
 ***
 
@@ -86,7 +86,7 @@ Create new account
 
 #### Defined in
 
-packages/core/src/types.ts:752
+[packages/core/src/types.ts:752](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L752)
 
 ***
 
@@ -120,7 +120,7 @@ Get memories matching criteria
 
 #### Defined in
 
-packages/core/src/types.ts:755
+[packages/core/src/types.ts:755](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L755)
 
 ***
 
@@ -138,7 +138,7 @@ packages/core/src/types.ts:755
 
 #### Defined in
 
-packages/core/src/types.ts:765
+[packages/core/src/types.ts:765](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L765)
 
 ***
 
@@ -162,7 +162,7 @@ packages/core/src/types.ts:765
 
 #### Defined in
 
-packages/core/src/types.ts:767
+[packages/core/src/types.ts:767](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L767)
 
 ***
 
@@ -192,7 +192,7 @@ packages/core/src/types.ts:767
 
 #### Defined in
 
-packages/core/src/types.ts:773
+[packages/core/src/types.ts:773](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L773)
 
 ***
 
@@ -218,7 +218,7 @@ packages/core/src/types.ts:773
 
 #### Defined in
 
-packages/core/src/types.ts:782
+[packages/core/src/types.ts:782](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L782)
 
 ***
 
@@ -238,7 +238,7 @@ packages/core/src/types.ts:782
 
 #### Defined in
 
-packages/core/src/types.ts:789
+[packages/core/src/types.ts:789](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L789)
 
 ***
 
@@ -270,7 +270,7 @@ packages/core/src/types.ts:789
 
 #### Defined in
 
-packages/core/src/types.ts:791
+[packages/core/src/types.ts:791](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L791)
 
 ***
 
@@ -292,7 +292,7 @@ packages/core/src/types.ts:791
 
 #### Defined in
 
-packages/core/src/types.ts:801
+[packages/core/src/types.ts:801](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L801)
 
 ***
 
@@ -324,7 +324,7 @@ packages/core/src/types.ts:801
 
 #### Defined in
 
-packages/core/src/types.ts:806
+[packages/core/src/types.ts:806](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L806)
 
 ***
 
@@ -346,7 +346,7 @@ packages/core/src/types.ts:806
 
 #### Defined in
 
-packages/core/src/types.ts:818
+[packages/core/src/types.ts:818](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L818)
 
 ***
 
@@ -366,7 +366,7 @@ packages/core/src/types.ts:818
 
 #### Defined in
 
-packages/core/src/types.ts:824
+[packages/core/src/types.ts:824](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L824)
 
 ***
 
@@ -386,7 +386,7 @@ packages/core/src/types.ts:824
 
 #### Defined in
 
-packages/core/src/types.ts:826
+[packages/core/src/types.ts:826](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L826)
 
 ***
 
@@ -408,7 +408,7 @@ packages/core/src/types.ts:826
 
 #### Defined in
 
-packages/core/src/types.ts:828
+[packages/core/src/types.ts:828](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L828)
 
 ***
 
@@ -436,7 +436,7 @@ packages/core/src/types.ts:828
 
 #### Defined in
 
-packages/core/src/types.ts:834
+[packages/core/src/types.ts:834](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L834)
 
 ***
 
@@ -454,7 +454,7 @@ packages/core/src/types.ts:834
 
 #### Defined in
 
-packages/core/src/types.ts:842
+[packages/core/src/types.ts:842](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L842)
 
 ***
 
@@ -472,7 +472,7 @@ packages/core/src/types.ts:842
 
 #### Defined in
 
-packages/core/src/types.ts:844
+[packages/core/src/types.ts:844](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L844)
 
 ***
 
@@ -490,7 +490,7 @@ packages/core/src/types.ts:844
 
 #### Defined in
 
-packages/core/src/types.ts:846
+[packages/core/src/types.ts:846](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L846)
 
 ***
 
@@ -508,7 +508,7 @@ packages/core/src/types.ts:846
 
 #### Defined in
 
-packages/core/src/types.ts:848
+[packages/core/src/types.ts:848](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L848)
 
 ***
 
@@ -526,7 +526,7 @@ packages/core/src/types.ts:848
 
 #### Defined in
 
-packages/core/src/types.ts:850
+[packages/core/src/types.ts:850](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L850)
 
 ***
 
@@ -544,7 +544,7 @@ packages/core/src/types.ts:850
 
 #### Defined in
 
-packages/core/src/types.ts:852
+[packages/core/src/types.ts:852](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L852)
 
 ***
 
@@ -562,7 +562,7 @@ packages/core/src/types.ts:852
 
 #### Defined in
 
-packages/core/src/types.ts:854
+[packages/core/src/types.ts:854](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L854)
 
 ***
 
@@ -580,7 +580,7 @@ packages/core/src/types.ts:854
 
 #### Defined in
 
-packages/core/src/types.ts:856
+[packages/core/src/types.ts:856](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L856)
 
 ***
 
@@ -598,7 +598,7 @@ packages/core/src/types.ts:856
 
 #### Defined in
 
-packages/core/src/types.ts:858
+[packages/core/src/types.ts:858](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L858)
 
 ***
 
@@ -618,7 +618,7 @@ packages/core/src/types.ts:858
 
 #### Defined in
 
-packages/core/src/types.ts:860
+[packages/core/src/types.ts:860](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L860)
 
 ***
 
@@ -638,7 +638,7 @@ packages/core/src/types.ts:860
 
 #### Defined in
 
-packages/core/src/types.ts:862
+[packages/core/src/types.ts:862](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L862)
 
 ***
 
@@ -656,7 +656,7 @@ packages/core/src/types.ts:862
 
 #### Defined in
 
-packages/core/src/types.ts:864
+[packages/core/src/types.ts:864](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L864)
 
 ***
 
@@ -674,7 +674,7 @@ packages/core/src/types.ts:864
 
 #### Defined in
 
-packages/core/src/types.ts:866
+[packages/core/src/types.ts:866](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L866)
 
 ***
 
@@ -694,7 +694,7 @@ packages/core/src/types.ts:866
 
 #### Defined in
 
-packages/core/src/types.ts:868
+[packages/core/src/types.ts:868](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L868)
 
 ***
 
@@ -716,7 +716,7 @@ packages/core/src/types.ts:868
 
 #### Defined in
 
-packages/core/src/types.ts:873
+[packages/core/src/types.ts:873](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L873)
 
 ***
 
@@ -738,7 +738,7 @@ packages/core/src/types.ts:873
 
 #### Defined in
 
-packages/core/src/types.ts:879
+[packages/core/src/types.ts:879](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L879)
 
 ***
 
@@ -760,7 +760,7 @@ packages/core/src/types.ts:879
 
 #### Defined in
 
-packages/core/src/types.ts:881
+[packages/core/src/types.ts:881](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L881)
 
 ***
 
@@ -780,4 +780,4 @@ packages/core/src/types.ts:881
 
 #### Defined in
 
-packages/core/src/types.ts:886
+[packages/core/src/types.ts:886](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L886)

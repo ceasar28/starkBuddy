@@ -342,4 +342,4 @@ Optional Twitter profile
 
 ## Defined in
 
-packages/core/src/types.ts:609
+[packages/core/src/types.ts:609](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L609)

@@ -25,4 +25,4 @@ A string containing formatted examples of conversations.
 
 ## Defined in
 
-packages/core/src/actions.ts:11
+[packages/core/src/actions.ts:11](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/actions.ts#L11)

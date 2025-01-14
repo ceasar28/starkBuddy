@@ -12,7 +12,7 @@ Available client platforms
 
 #### Defined in
 
-packages/core/src/types.ts:601
+[packages/core/src/types.ts:601](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L601)
 
 ***
 
@@ -22,7 +22,7 @@ packages/core/src/types.ts:601
 
 #### Defined in
 
-packages/core/src/types.ts:602
+[packages/core/src/types.ts:602](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L602)
 
 ***
 
@@ -32,7 +32,7 @@ packages/core/src/types.ts:602
 
 #### Defined in
 
-packages/core/src/types.ts:603
+[packages/core/src/types.ts:603](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L603)
 
 ***
 
@@ -42,4 +42,4 @@ packages/core/src/types.ts:603
 
 #### Defined in
 
-packages/core/src/types.ts:604
+[packages/core/src/types.ts:604](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L604)

@@ -28,4 +28,4 @@
 
 ## Defined in
 
-packages/core/src/types.ts:1120
+[packages/core/src/types.ts:1120](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/types.ts#L1120)

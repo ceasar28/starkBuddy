@@ -20,4 +20,4 @@ A string that summarizes the descriptions for each evaluator example, formatted 
 
 ## Defined in
 
-packages/core/src/evaluators.ts:110
+[packages/core/src/evaluators.ts:110](https://github.com/ceasar28/starkBuddy/blob/main/starkBuddy_Agent1/packages/core/src/evaluators.ts#L110)
