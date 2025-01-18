@@ -48,4 +48,4 @@
 
 ## Defined in
 
-packages/core/src/generation.ts:799
+[packages/core/src/generation.ts:799](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/generation.ts#L799)

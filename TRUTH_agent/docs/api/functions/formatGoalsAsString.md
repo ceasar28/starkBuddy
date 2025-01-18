@@ -16,4 +16,4 @@
 
 ## Defined in
 
-packages/core/src/goals.ts:30
+[packages/core/src/goals.ts:30](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/goals.ts#L30)

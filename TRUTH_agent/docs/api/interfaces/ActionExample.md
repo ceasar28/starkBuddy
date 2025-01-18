@@ -14,7 +14,7 @@ User associated with the example
 
 #### Defined in
 
-packages/core/src/types.ts:39
+[packages/core/src/types.ts:39](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/types.ts#L39)
 
 ***
 
@@ -26,4 +26,4 @@ Content of the example
 
 #### Defined in
 
-packages/core/src/types.ts:42
+[packages/core/src/types.ts:42](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/types.ts#L42)

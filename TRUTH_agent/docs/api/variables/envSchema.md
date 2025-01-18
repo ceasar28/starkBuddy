@@ -40,4 +40,4 @@ API Keys with specific formats
 
 ## Defined in
 
-packages/core/src/environment.ts:5
+[packages/core/src/environment.ts:5](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/environment.ts#L5)

@@ -6,4 +6,4 @@
 
 ## Defined in
 
-packages/core/src/logger.ts:267
+[packages/core/src/logger.ts:267](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/logger.ts#L267)

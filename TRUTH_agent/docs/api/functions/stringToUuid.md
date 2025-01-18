@@ -14,4 +14,4 @@
 
 ## Defined in
 
-packages/core/src/uuid.ts:4
+[packages/core/src/uuid.ts:4](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/uuid.ts#L4)

@@ -18,4 +18,4 @@ Object containing environment variables
 
 ## Defined in
 
-packages/core/src/settings.ts:69
+[packages/core/src/settings.ts:69](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/settings.ts#L69)

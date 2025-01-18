@@ -46,4 +46,4 @@ Text content
 
 ## Defined in
 
-packages/core/src/types.ts:540
+[packages/core/src/types.ts:540](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/types.ts#L540)

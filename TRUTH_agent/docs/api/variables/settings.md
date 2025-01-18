@@ -8,4 +8,4 @@ Initialize settings based on environment
 
 ## Defined in
 
-packages/core/src/settings.ts:126
+[packages/core/src/settings.ts:126](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/settings.ts#L126)

@@ -22,7 +22,7 @@
 
 #### Defined in
 
-packages/core/src/cache.ts:19
+[packages/core/src/cache.ts:19](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/cache.ts#L19)
 
 ## Properties
 
@@ -32,7 +32,7 @@ packages/core/src/cache.ts:19
 
 #### Defined in
 
-packages/core/src/cache.ts:17
+[packages/core/src/cache.ts:17](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/cache.ts#L17)
 
 ## Methods
 
@@ -54,7 +54,7 @@ packages/core/src/cache.ts:17
 
 #### Defined in
 
-packages/core/src/cache.ts:23
+[packages/core/src/cache.ts:23](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/cache.ts#L23)
 
 ***
 
@@ -78,7 +78,7 @@ packages/core/src/cache.ts:23
 
 #### Defined in
 
-packages/core/src/cache.ts:27
+[packages/core/src/cache.ts:27](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/cache.ts#L27)
 
 ***
 
@@ -100,4 +100,4 @@ packages/core/src/cache.ts:27
 
 #### Defined in
 
-packages/core/src/cache.ts:31
+[packages/core/src/cache.ts:31](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/cache.ts#L31)

@@ -28,4 +28,4 @@ Promise resolving to array of text chunks with bleed sections
 
 ## Defined in
 
-packages/core/src/generation.ts:556
+[packages/core/src/generation.ts:556](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/generation.ts#L556)

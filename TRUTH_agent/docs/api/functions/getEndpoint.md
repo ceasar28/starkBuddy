@@ -14,4 +14,4 @@
 
 ## Defined in
 
-packages/core/src/models.ts:385
+[packages/core/src/models.ts:385](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/models.ts#L385)

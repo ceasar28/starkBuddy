@@ -39,4 +39,4 @@ const text = addHeader(header, body);
 
 ## Defined in
 
-packages/core/src/context.ts:58
+[packages/core/src/context.ts:58](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/context.ts#L58)

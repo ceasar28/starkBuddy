@@ -342,4 +342,4 @@ Optional Twitter profile
 
 ## Defined in
 
-packages/core/src/types.ts:609
+[packages/core/src/types.ts:609](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/types.ts#L609)

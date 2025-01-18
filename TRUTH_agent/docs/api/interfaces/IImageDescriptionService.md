@@ -24,7 +24,7 @@
 
 #### Defined in
 
-packages/core/src/types.ts:968
+[packages/core/src/types.ts:968](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/types.ts#L968)
 
 ## Methods
 
@@ -48,7 +48,7 @@ Add abstract initialize method that must be implemented by derived classes
 
 #### Defined in
 
-packages/core/src/types.ts:973
+[packages/core/src/types.ts:973](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/types.ts#L973)
 
 ***
 
@@ -74,4 +74,4 @@ packages/core/src/types.ts:973
 
 #### Defined in
 
-packages/core/src/types.ts:1060
+[packages/core/src/types.ts:1060](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/types.ts#L1060)

@@ -24,4 +24,4 @@ An object parsed from the JSON string if successful; otherwise, null or the resu
 
 ## Defined in
 
-packages/core/src/parsing.ts:103
+[packages/core/src/parsing.ts:103](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/parsing.ts#L103)

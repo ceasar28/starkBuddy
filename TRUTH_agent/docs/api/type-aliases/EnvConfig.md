@@ -8,4 +8,4 @@ Type inference
 
 ## Defined in
 
-packages/core/src/environment.ts:23
+[packages/core/src/environment.ts:23](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/environment.ts#L23)

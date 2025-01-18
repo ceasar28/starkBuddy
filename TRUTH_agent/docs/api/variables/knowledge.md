@@ -52,4 +52,4 @@
 
 ## Defined in
 
-packages/core/src/knowledge.ts:150
+[packages/core/src/knowledge.ts:150](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/knowledge.ts#L150)

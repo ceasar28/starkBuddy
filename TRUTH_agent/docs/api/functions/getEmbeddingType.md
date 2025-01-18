@@ -14,4 +14,4 @@
 
 ## Defined in
 
-packages/core/src/embedding.ts:99
+[packages/core/src/embedding.ts:99](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/embedding.ts#L99)

@@ -6,4 +6,4 @@
 
 ## Defined in
 
-packages/core/src/parsing.ts:41
+[packages/core/src/parsing.ts:41](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/parsing.ts#L41)

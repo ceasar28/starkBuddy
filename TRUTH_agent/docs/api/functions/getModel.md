@@ -16,4 +16,4 @@
 
 ## Defined in
 
-packages/core/src/models.ts:381
+[packages/core/src/models.ts:381](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/models.ts#L381)

@@ -14,4 +14,4 @@
 
 ## Defined in
 
-packages/core/src/parsing.ts:36
+[packages/core/src/parsing.ts:36](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/parsing.ts#L36)

@@ -24,4 +24,4 @@ Configuration options for generating objects.
 
 ## Defined in
 
-packages/core/src/generation.ts:1088
+[packages/core/src/generation.ts:1088](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/generation.ts#L1088)

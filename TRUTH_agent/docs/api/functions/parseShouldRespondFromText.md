@@ -14,4 +14,4 @@
 
 ## Defined in
 
-packages/core/src/parsing.ts:13
+[packages/core/src/parsing.ts:13](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/parsing.ts#L13)

@@ -20,4 +20,4 @@
 
 ## Defined in
 
-packages/core/src/posts.ts:4
+[packages/core/src/posts.ts:4](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/posts.ts#L4)

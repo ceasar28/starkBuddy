@@ -22,4 +22,4 @@ string
 
 ## Defined in
 
-packages/core/src/messages.ts:45
+[packages/core/src/messages.ts:45](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/messages.ts#L45)

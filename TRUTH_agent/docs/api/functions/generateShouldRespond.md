@@ -28,4 +28,4 @@ Promise resolving to "RESPOND", "IGNORE", "STOP" or null
 
 ## Defined in
 
-packages/core/src/generation.ts:501
+[packages/core/src/generation.ts:501](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/generation.ts#L501)

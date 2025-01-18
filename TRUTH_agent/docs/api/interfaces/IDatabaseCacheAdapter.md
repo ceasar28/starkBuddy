@@ -22,7 +22,7 @@
 
 #### Defined in
 
-packages/core/src/types.ts:890
+[packages/core/src/types.ts:890](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/types.ts#L890)
 
 ***
 
@@ -46,7 +46,7 @@ packages/core/src/types.ts:890
 
 #### Defined in
 
-packages/core/src/types.ts:895
+[packages/core/src/types.ts:895](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/types.ts#L895)
 
 ***
 
@@ -68,4 +68,4 @@ packages/core/src/types.ts:895
 
 #### Defined in
 
-packages/core/src/types.ts:901
+[packages/core/src/types.ts:901](https://github.com/ceasar28/TRUTH/blob/main/TRUTH_agent/packages/core/src/types.ts#L901)
