@@ -2,10 +2,10 @@ import { Character, Clients, ModelProviderName } from "@ai16z/eliza";
 import { goatPlugin } from "@ai16z/plugin-goat";
 
 export const mainCharacter: Character = {
-    name: "modeMIND",
-    username: "modeMin",
-    plugins: [goatPlugin],
-    clients: [Clients.TWITTER, Clients.DIRECT],
+    name: "TRUTH",
+    username: "truth_intelligence",
+    plugins: [],
+    clients: [Clients.DIRECT],
     modelProvider: ModelProviderName.OPENAI,
     settings: {
         secrets: {},

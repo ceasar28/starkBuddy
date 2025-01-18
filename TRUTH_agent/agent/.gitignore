@@ -4,6 +4,7 @@
 !mainCharacter.ts
 !skynetCharacter.ts
 !modeMINDCharacter.ts
+!TRUTHCharacter.ts
 .env
 *.env
 .env*
