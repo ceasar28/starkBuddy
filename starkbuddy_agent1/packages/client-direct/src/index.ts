@@ -497,6 +497,184 @@ export class DirectClient {
                 }
             }
         );
+
+        this.app.post(
+            "/:agentId/txhash",
+            async (req: express.Request, res: express.Response) => {
+                try {
+                    const apiKEY = process.env.ALCHEMY_KEY;
+                    // Prepare URLs for fetch calls
+                    const baseUrl = `https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_7/${apiKEY}`;
+                    const hash = req.body.txhash?.trim();
+
+                    if (!hash) {
+                        res.status(400).json({ error: " hash is required." });
+                        return;
+                    }
+                    const payload = {
+                        id: 1,
+                        jsonrpc: "2.0",
+                        method: "starknet_getTransactionReceipt",
+                        params: [hash],
+                    };
+
+                    const receiptResponse = await fetch(baseUrl, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload),
+                    });
+
+                    const txnReceipts = await receiptResponse.json();
+
+                    const agentId = req.params.agentId;
+                    const roomId = stringToUuid(
+                        req.body.roomId ?? "default-room-" + agentId
+                    );
+                    const userId = stringToUuid(req.body.userId ?? "user");
+
+                    let runtime = this.agents.get(agentId);
+
+                    // if runtime is null, look for runtime with the same name
+                    if (!runtime) {
+                        runtime = Array.from(this.agents.values()).find(
+                            (a) =>
+                                a.character.name.toLowerCase() ===
+                                agentId.toLowerCase()
+                        );
+                    }
+
+                    if (!runtime) {
+                        res.status(404).send("Agent not found");
+                        return;
+                    }
+
+                    await runtime.ensureConnection(
+                        userId,
+                        roomId,
+                        req.body.userName,
+                        req.body.name,
+                        "direct"
+                    );
+
+                    const text = `You are an AI agent specializing in StarkNet blockchain analysis. Your task is to analyze a transaction receipt based on the provided JSON data and generate detailed insights, key findings, and recommendations. Please present the response in a structured format.
+
+Here is the transaction receipt:
+- Transaction Receipt from the Blockchain: ${txnReceipts}
+- JSON-RPC Version: ${txnReceipts.jsonrpc}
+- ID: ${txnReceipts.id}
+- Actual Fee: ${txnReceipts.result.actual_fee.amount} (in WEI)
+- Block Hash: ${txnReceipts.result.block_hash}
+- Block Number: ${txnReceipts.result.block_number}
+- Events: ${JSON.stringify(txnReceipts.result.events, null, 2)}
+
+Please provide the following:
+1. **Field-by-Field Breakdown**:  
+   - Explain the purpose and significance of each field in the JSON (e.g., actual_fee, block_hash, block_number, events, etc.).
+   - Convert values in hexadecimal (e.g., fees, data fields) into readable formats like ETH or USD where applicable.  
+
+2. **Event Analysis**:  
+   - Break down the \`events\` array, explain each \`data\` field, and describe its relevance to the transaction.
+   - Include insights into \`from_address\` and the significance of \`keys\`.
+
+3. **Key Insights**:  
+   - Summarize what this receipt reveals about the transaction.
+   - Discuss the fees, efficiency, or any anomalies observed.
+
+4. **Actionable Recommendations**:  
+   - Provide advice for developers or users analyzing similar transactions.
+   - Suggest tools or frameworks for further analysis of StarkNet transactions.
+
+Use a concise, professional tone and present your findings in an organized manner.`;
+                    const messageId = stringToUuid(Date.now().toString());
+
+                    const content: Content = {
+                        text,
+                        attachments: [],
+                        source: "direct",
+                        inReplyTo: undefined,
+                    };
+
+                    const userMessage = {
+                        content,
+                        userId,
+                        roomId,
+                        agentId: runtime.agentId,
+                    };
+
+                    const memory: Memory = {
+                        id: messageId,
+                        agentId: runtime.agentId,
+                        userId,
+                        roomId,
+                        content,
+                        createdAt: Date.now(),
+                    };
+
+                    await runtime.messageManager.createMemory(memory);
+
+                    const state = await runtime.composeState(userMessage, {
+                        agentName: runtime.character.name,
+                    });
+
+                    const context = composeContext({
+                        state,
+                        template: messageHandlerTemplate,
+                    });
+
+                    const response = await generateMessageResponse({
+                        runtime: runtime,
+                        context,
+                        modelClass: ModelClass.SMALL,
+                    });
+
+                    // save response to memory
+                    const responseMessage = {
+                        ...userMessage,
+                        userId: runtime.agentId,
+                        content: response,
+                    };
+
+                    await runtime.messageManager.createMemory(responseMessage);
+
+                    if (!response) {
+                        res.status(500).send(
+                            "No response from generateMessageResponse"
+                        );
+                        return;
+                    }
+
+                    let message = null as Content | null;
+
+                    await runtime.evaluate(memory, state);
+
+                    const _result = await runtime.processActions(
+                        memory,
+                        [responseMessage],
+                        state,
+                        async (newMessages) => {
+                            message = newMessages;
+                            return [memory];
+                        }
+                    );
+
+                    if (message) {
+                        res.json({
+                            response,
+                            message,
+                        });
+                    } else {
+                        res.json({ response });
+                    }
+                } catch (error) {
+                    console.error(error);
+                    res.status(500).json({
+                        error,
+                        details: error.message,
+                    });
+                }
+            }
+        );
+
         this.app.get("/ping", (req: express.Request, res: express.Response) => {
             res.json({
                 success: true,
