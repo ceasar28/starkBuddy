@@ -162,7 +162,7 @@ import { goatPlugin } from "@ai16z/plugin-goat";
 
 export const mainCharacter: Character = {
     name: "StarkBuddy",
-    clients: [Clients.DIRECT],
+    clients: [Clients.DIRECT, Clients.TELEGRAM],
     modelProvider: ModelProviderName.OPENAI,
     settings: {
         voice: {
