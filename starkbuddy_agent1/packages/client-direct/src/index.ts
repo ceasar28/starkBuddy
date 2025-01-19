@@ -675,6 +675,209 @@ Use a concise, professional tone and present your findings in an organized manne
             }
         );
 
+        this.app.post(
+            "/:agentId/token",
+            async (req: express.Request, res: express.Response) => {
+                try {
+                    const tokenAddress = req.body.tokenAddress?.trim();
+                    const baseUrl = `https://api.geckoterminal.com/api/v2/networks/starknet-alpha/tokens/${tokenAddress}`;
+
+                    if (!tokenAddress) {
+                        res.status(400).json({
+                            error: " token Address is required.",
+                        });
+                        return;
+                    }
+
+                    const tokenDataResponse = await fetch(baseUrl, {
+                        method: "GET",
+                        headers: { "Content-Type": "application/json" },
+                    });
+
+                    const tokenData = await tokenDataResponse.json();
+
+                    const tokenMetadata = {
+                        address: tokenData.data.attributes.address,
+                        name: tokenData.data.attributes.name,
+                        symbol: tokenData.data.attributes.symbol,
+                        decimal: tokenData.data.attributes.decimal,
+                        total_supply: tokenData.data.attributes.total_supply,
+                        price_usd: tokenData.data.attributes.price_usd,
+                        fully_Diluted_Valuation:
+                            tokenData.data.attributes.fdv_usd ||
+                            parseFloat(tokenData.data.attributes.price_usd) *
+                                parseFloat(tokenData.data.attributes.price_usd),
+                        market_cap_usd:
+                            tokenData.data.attributes.market_cap_usd,
+                        volume_usd: tokenData.data.attributes.volume_usd.h24,
+                    };
+
+                    const agentId = req.params.agentId;
+                    const roomId = stringToUuid(
+                        req.body.roomId ?? "default-room-" + agentId
+                    );
+                    const userId = stringToUuid(req.body.userId ?? "user");
+
+                    let runtime = this.agents.get(agentId);
+
+                    // if runtime is null, look for runtime with the same name
+                    if (!runtime) {
+                        runtime = Array.from(this.agents.values()).find(
+                            (a) =>
+                                a.character.name.toLowerCase() ===
+                                agentId.toLowerCase()
+                        );
+                    }
+
+                    if (!runtime) {
+                        res.status(404).send("Agent not found");
+                        return;
+                    }
+
+                    await runtime.ensureConnection(
+                        userId,
+                        roomId,
+                        req.body.userName,
+                        req.body.name,
+                        "direct"
+                    );
+
+                    const text = `You are an AI agent specializing in blockchain analysis. Your task is to analyze a token on the StarkNet blockchain based on the provided on-chain data and generate detailed insights, key findings, and projections. Please present the response in a structured format.
+
+Start by presenting the token's basic information clearly:
+
+- **Token Name**: ${tokenMetadata.name}
+- **Symbol**: ${tokenMetadata.symbol}
+- **Address**: ${tokenMetadata.address}
+
+Then, proceed to analyze the token in detail. Here is the token data:
+- Decimal: ${tokenMetadata.decimal}
+- Total Supply: ${tokenMetadata.total_supply}
+- Price (USD): $${tokenMetadata.price_usd}
+- Fully Diluted Valuation (FDV): $${tokenMetadata.fully_Diluted_Valuation}
+${
+    tokenMetadata.market_cap_usd
+        ? `- Market Cap (USD): $${tokenMetadata.market_cap_usd}`
+        : ""
+}
+- 24h Volume (USD): $${tokenMetadata.volume_usd || "Data Missing"}
+
+Some parameters might be missing. Fill in gaps using relevant knowledge and as an expert blockchain analyst. Analyze the data and provide the following:
+
+1. **Token Insights**:
+   - Evaluate holder distribution, price trends, and liquidity.
+   - Discuss the significance of FDV versus other metrics and potential implications for token growth.
+   - Identify risks or anomalies such as centralized token ownership, lack of liquidity, or suspicious trading patterns.
+
+2. **Market Behavior**:
+   - Assess recent price action, volume trends, and the token's role within its ecosystem (e.g., utility, governance, speculation).
+   - Provide insights into how current market conditions may affect this token's behavior.
+
+3. **Projections**:
+   - Predict future performance based on available data.
+   - Comment on the potential for adoption, demand growth, or decline in value.
+   - Highlight any dependencies, such as reliance on specific dApps, platforms, or macroeconomic factors.
+
+4. **Recommendations**:
+   - Provide actionable advice for holders or potential investors.
+   - Suggest strategies for managing risk or leveraging potential growth.
+   - Offer guidance for further analysis, such as key metrics to monitor or tools to use.
+
+5. **Possible Behaviors**:
+   - Explore scenarios under which the token's price could rise or fall.
+   - Analyze how external factors (e.g., regulatory changes, partnerships, broader crypto market trends) might influence its behavior.
+
+Use a concise, professional tone, and ensure the insights are actionable and relevant for developers, investors, and analysts alike.`;
+                    const messageId = stringToUuid(Date.now().toString());
+
+                    const content: Content = {
+                        text,
+                        attachments: [],
+                        source: "direct",
+                        inReplyTo: undefined,
+                    };
+
+                    const userMessage = {
+                        content,
+                        userId,
+                        roomId,
+                        agentId: runtime.agentId,
+                    };
+
+                    const memory: Memory = {
+                        id: messageId,
+                        agentId: runtime.agentId,
+                        userId,
+                        roomId,
+                        content,
+                        createdAt: Date.now(),
+                    };
+
+                    await runtime.messageManager.createMemory(memory);
+
+                    const state = await runtime.composeState(userMessage, {
+                        agentName: runtime.character.name,
+                    });
+
+                    const context = composeContext({
+                        state,
+                        template: messageHandlerTemplate,
+                    });
+
+                    const response = await generateMessageResponse({
+                        runtime: runtime,
+                        context,
+                        modelClass: ModelClass.SMALL,
+                    });
+
+                    // save response to memory
+                    const responseMessage = {
+                        ...userMessage,
+                        userId: runtime.agentId,
+                        content: response,
+                    };
+
+                    await runtime.messageManager.createMemory(responseMessage);
+
+                    if (!response) {
+                        res.status(500).send(
+                            "No response from generateMessageResponse"
+                        );
+                        return;
+                    }
+
+                    let message = null as Content | null;
+
+                    await runtime.evaluate(memory, state);
+
+                    const _result = await runtime.processActions(
+                        memory,
+                        [responseMessage],
+                        state,
+                        async (newMessages) => {
+                            message = newMessages;
+                            return [memory];
+                        }
+                    );
+
+                    if (message) {
+                        res.json({
+                            response,
+                            message,
+                        });
+                    } else {
+                        res.json({ response });
+                    }
+                } catch (error) {
+                    console.error(error);
+                    res.status(500).json({
+                        error,
+                        details: error.message,
+                    });
+                }
+            }
+        );
+
         this.app.get("/ping", (req: express.Request, res: express.Response) => {
             res.json({
                 success: true,
