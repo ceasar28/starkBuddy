@@ -410,7 +410,7 @@ export class DirectClient {
                         "direct"
                     );
 
-                    const text = `Using your personality posts random tweets not more that 180 character and no hashtags, let the post embody a real person making a tweet, act like the one making the post, let the tweet posts be randoms.. do not use phrase that start like "in a" and "Here's a "`;
+                    const text = `Generate random tweets, each no more than 180 characters, written in the style of a conservative politician. The tweets should reflect strength, vision, and principles while maintaining a confident and assertive tone. Avoid starting with phrases like ‘In a’ or ‘Here’s a.’ Do not ask questions or include hashtags. Each tweet should embody the character of a real person sharing a thought, opinion, or message, focused on values, leadership, and patriotism.`;
                     const messageId = stringToUuid(Date.now().toString());
 
                     const content: Content = {
