@@ -4,7 +4,7 @@ export const mainCharacter: Character = {
     name: "starkbuddy",
     username: "starkBuddy",
     plugins: [],
-    clients: [Clients.DIRECT, Clients.TELEGRAM],
+    clients: [Clients.DIRECT, Clients.TELEGRAM, Clients.TWITTER],
     modelProvider: ModelProviderName.OPENAI,
     settings: {
         secrets: {},
