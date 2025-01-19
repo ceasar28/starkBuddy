@@ -410,7 +410,7 @@ export class DirectClient {
                         "direct"
                     );
 
-                    const text = `Using your personality be  posts random tweets not more that 180 character and no hashtags, let the post embody a real person making a tweet, act like the one making the post, let the tweet posts be randoms.. do not use phrase that start like "in a "`;
+                    const text = `Using your personality posts random tweets not more that 180 character and no hashtags, let the post embody a real person making a tweet, act like the one making the post, let the tweet posts be randoms.. do not use phrase that start like "in a" and "Here's a "`;
                     const messageId = stringToUuid(Date.now().toString());
 
                     const content: Content = {
