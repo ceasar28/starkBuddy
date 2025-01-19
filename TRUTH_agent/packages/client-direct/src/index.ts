@@ -377,49 +377,9 @@ export class DirectClient {
             }
         );
         this.app.post(
-            "/:agentId/analyze",
+            "/:agentId/post",
             async (req: express.Request, res: express.Response) => {
                 try {
-                    // Prepare URLs for fetch calls
-                    const baseUrl = "https://explorer.mode.network/api/v2";
-                    const contract = req.body.contract.trim();
-
-                    const urls = [
-                        `${baseUrl}/addresses/${contract}`,
-                        `${baseUrl}/tokens/${contract}/holders`,
-                        `${baseUrl}/tokens/${contract}/counters`,
-                    ];
-
-                    // Fetch all data concurrently
-                    const [tokenInfo, tokenHolders, tokenHoldersCount] =
-                        await Promise.all(
-                            urls.map((url) =>
-                                fetch(url, { method: "GET" }).then((response) =>
-                                    response.json()
-                                )
-                            )
-                        );
-
-                    // Respond with the collected data
-                    const tokenAnalyticData = {
-                        tokenName: tokenInfo.name,
-                        tokenSymbol: tokenInfo["token"].symbol,
-                        tokenBalance: tokenInfo.coin_balance,
-                        tokenCreationHash: tokenInfo.creation_tx_hash,
-                        tokenExchangeRate: tokenInfo.exchange_rate,
-                        tokenIsVerified: tokenInfo.is_verified,
-                        tokenCreator: tokenInfo.creator_address_hash,
-                        totalSupply: tokenInfo["token"].total_supply,
-                        totalHolders: tokenInfo["token"].holders,
-                        decimals: tokenInfo["token"].decimals,
-                        topTokenHolderValues: tokenHolders.items.map(
-                            (item) => item.value
-                        ),
-                        totalTransactions: tokenHoldersCount.transfers_count,
-                        formattedTotalSupply: tokenInfo["token"].total_supply,
-                    };
-                    // res.json({ tokenAnalyticData });
-
                     const agentId = req.params.agentId;
                     const roomId = stringToUuid(
                         req.body.roomId ?? "default-room-" + agentId
@@ -450,25 +410,7 @@ export class DirectClient {
                         "direct"
                     );
 
-                    const text = `You are an AI agent specializing in blockchain analysis. Your task is to analyze a token based on the provided on-chain data and generate detailed insights, key findings, and future projections. Please present the response in a structured format.
-
-Here is the token data:
-- Token Name: ${tokenAnalyticData.tokenName}
-- Symbol: ${tokenAnalyticData.tokenSymbol}
-- Total Supply: ${tokenAnalyticData.totalSupply}
-- Verified: ${tokenAnalyticData.tokenIsVerified}
-- Holders: ${tokenAnalyticData.totalHolders}
-- Exchange Rate: $${tokenAnalyticData.tokenExchangeRate}
-- Top Holder Balances: ${tokenAnalyticData.topTokenHolderValues}
-- Total Transactions: ${tokenAnalyticData.totalTransactions}
-- Total Holders : ${tokenAnalyticData.totalHolders}
-
-Please provide the following:
-1. **Token Insights**: Key observations about holder distribution, transaction activity, and liquidity.
-2. **Projections**: Predict future trends in growth, market interest, and volatility.
-3. **Actionable Advice**: Recommendations for token holders or potential investors.
-
-Use a concise, professional tone and present your findings in an organized manner.`;
+                    const text = `Using your personality be generating short twitter posts not more that 180 character and no hashtags, let the post embody a real person making a tweet`;
                     const messageId = stringToUuid(Date.now().toString());
 
                     const content: Content = {
@@ -542,9 +484,9 @@ Use a concise, professional tone and present your findings in an organized manne
                     );
 
                     if (message) {
-                        res.json({ response, message, tokenAnalyticData });
+                        res.json({ response, message });
                     } else {
-                        res.json({ response, tokenAnalyticData });
+                        res.json({ response });
                     }
                 } catch (error) {
                     console.error(error);
