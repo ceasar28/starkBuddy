@@ -48,7 +48,7 @@ export class StarkbuddyBotService {
       const regex = /^Swap (\d+\.?\d*) (\w+) to (\w+)$/i;
       const match = msg.text.trim().match(regex);
       const match2 = msg.text.trim().match(regex2);
-      if (match || (match2 && !session.importWallet)) {
+      if ((match || match2) && !session.importWallet) {
         return this.handleAgentprompts(user, msg.text.trim());
       }
 
@@ -105,6 +105,8 @@ export class StarkbuddyBotService {
               reply_markup: replyMarkup,
             },
           );
+          await this.SessionModel.deleteMany({ chatId: msg.chat.id });
+          return;
         }
       }
     } catch (error) {
@@ -255,7 +257,7 @@ export class StarkbuddyBotService {
         setTimeout(async () => {
           clearInterval(typingInterval);
 
-          await this.starkBuddyBot.sendMessage(
+          return await this.starkBuddyBot.sendMessage(
             user.chatId,
             `Swap of ${amount} ${fromToken} to ${toToken} token was successful`,
           );
@@ -273,51 +275,23 @@ export class StarkbuddyBotService {
           await this.SessionModel.deleteMany({ chatId: user.chatId });
           return;
         }
-      }
-
-      const response = await this.defiAgentService.swapToken(msg);
-      if (response.response) {
-        return await this.starkBuddyBot.sendMessage(
-          user.chatId,
-          response.response,
-          {
-            parse_mode: 'Markdown',
-          },
-        );
+      } else if (!match2 && !match) {
+        const response = await this.defiAgentService.swapToken(msg);
+        if (response.response) {
+          return await this.starkBuddyBot.sendMessage(
+            user.chatId,
+            response.response,
+            {
+              parse_mode: 'Markdown',
+            },
+          );
+        }
+        return;
       }
     } catch (error) {
       console.log(error);
     }
   };
-
-  //   promptAgentToRebalance = async (user: UserDocument, msg: string) => {
-  //     console.log('rebalancing');
-  //     await this.starkBuddyBot.sendChatAction(user.chatId, 'typing');
-  //     try {
-  //       const encryptedWallet = await this.walletService.decryptWallet(
-  //         `${process.env.DEFAULT_WALLET_PIN}`,
-  //         user.walletDetails,
-  //       );
-  //       console.log(encryptedWallet);
-  //       if (encryptedWallet.privateKey) {
-  //         const response = await this.rebalancrAgentService.swapToken(
-  //           encryptedWallet.privateKey,
-  //           msg,
-  //         );
-  //         if (response) {
-  //           return await this.starkBuddyBot.sendMessage(
-  //             user.chatId,
-  //             `🔔Rebalance Alert🔔\n\n${response}`,
-  //             {
-  //               parse_mode: 'Markdown',
-  //             },
-  //           );
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
 
   handleButtonCommands = async (query: any) => {
     this.logger.debug(query);
