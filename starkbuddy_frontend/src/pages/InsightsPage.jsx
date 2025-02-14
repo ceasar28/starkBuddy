@@ -7,7 +7,7 @@ const InsightsPage = () => {
         <PageTemplate
             title="Token Insights"
             placeholder="Enter a contract address..."
-            endpoint="https://app.eventblink.xyz/starkbuddy/1829d6bd-dd04-0e9f-9e38-f5be69bef551/token"
+            endpoint="https://app.eventblink.xyz/starkbuddy/1829d6bd-dd04-0e9f-9e38-f5be69bef551/sentiment"
             generatePayload={generateInsightsPayload}
             formatReply={formatInsightsReply}
         />
