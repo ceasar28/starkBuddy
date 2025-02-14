@@ -1,0 +1,13 @@
+*.ts
+!index.ts
+!character.ts
+!mainCharacter.ts
+!skynetCharacter.ts
+!modeMINDCharacter.ts
+!TRUTHCharacter.ts
+!STARKBUDDY_CHARACTER.ts
+.env
+*.env
+.env*
+/data
+/generatedImages
