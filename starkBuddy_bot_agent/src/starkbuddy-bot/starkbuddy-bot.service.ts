@@ -139,7 +139,7 @@ export class StarkbuddyBotService {
 
           await this.starkBuddyBot.sendMessage(
             msg.chat.id,
-            `Swap of ${amount} ${fromToken} to ${toToken} token was successful`,
+            `Swap of ${amount} ${fromToken} to ${toToken} token was successful!.\n\nIf you have any further questions or need assistance with anything else in the Starknet ecosystem, feel free to ask!`,
           );
         }, 10000);
       }
@@ -259,7 +259,7 @@ export class StarkbuddyBotService {
 
           return await this.starkBuddyBot.sendMessage(
             user.chatId,
-            `Swap of ${amount} ${fromToken} to ${toToken} token was successful`,
+            `Swap of ${amount} ${fromToken} to ${toToken} token was successful!.\n\nIf you have any further questions or need assistance with anything else in the Starknet ecosystem, feel free to ask!`,
           );
         }, 10000);
       } else if (match2) {
