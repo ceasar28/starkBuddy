@@ -11,16 +11,16 @@ export const wallerDetailsMarkup = async (address: any) => {
     keyboard: [
       [
         {
-          text: '🔎 View on modescan',
+          text: '🔎 View on starkscan',
           url: `${STARKSCAN_SCAN_URL}/contract/${address}`,
         },
-        {
-          text: 'check Balance',
-          callback_data: JSON.stringify({
-            command: '/checkBalance',
-            language: 'english',
-          }),
-        },
+        // {
+        //   text: 'check Balance',
+        //   callback_data: JSON.stringify({
+        //     command: '/checkBalance',
+        //     language: 'english',
+        //   }),
+        // },
       ],
       [
         {

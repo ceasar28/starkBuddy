@@ -32,6 +32,9 @@ export class Session {
   @Prop({ default: false })
   tokenInsight: boolean;
 
+  @Prop({ default: false })
+  swap: boolean;
+
   @Prop()
   importWalletPromptInputId: number[];
 
@@ -40,12 +43,6 @@ export class Session {
 
   @Prop()
   transactionId: string;
-
-  @Prop({ default: false })
-  allocationSetting: boolean;
-
-  @Prop({ default: false })
-  thresholdSetting: boolean;
 }
 
 export const SessionSchema = SchemaFactory.createForClass(Session);

@@ -24,7 +24,7 @@ export const allFeaturesMarkup = async () => {
         {
           text: 'Swap tokens 🔄',
           callback_data: JSON.stringify({
-            command: '/linkToApp',
+            command: '/swap',
             language: 'english',
           }),
         },
@@ -33,8 +33,7 @@ export const allFeaturesMarkup = async () => {
         {
           text: '📢 Share',
           language: 'english',
-          switch_inline_query:
-            'Rebalancr, portfolio management has never been easier!.',
+          switch_inline_query: 'StarkBuddy, Defi AGENT!.',
         },
       ],
       [

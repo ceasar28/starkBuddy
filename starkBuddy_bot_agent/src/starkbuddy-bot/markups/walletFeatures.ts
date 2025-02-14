@@ -35,13 +35,6 @@ export const walletFeaturesMarkup = async () => {
             language: 'english',
           }),
         },
-        {
-          text: 'check Balance',
-          callback_data: JSON.stringify({
-            command: '/checkBalance',
-            language: 'english',
-          }),
-        },
       ],
       [
         {

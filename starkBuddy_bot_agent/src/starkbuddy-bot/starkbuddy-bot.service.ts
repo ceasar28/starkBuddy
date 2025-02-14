@@ -5,10 +5,7 @@ import {
   allFeaturesMarkup,
   displayPrivateKeyMarkup,
   exportWalletWarningMarkup,
-  linkToAppMarkup,
   resetWalletWarningMarkup,
-  showBalanceMarkup,
-  showPortfolioMarkup,
   wallerDetailsMarkup,
   walletFeaturesMarkup,
   welcomeMessageMarkup,
@@ -18,6 +15,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from 'src/database/schemas/user.schema';
 import { Session, SessionDocument } from 'src/database/schemas/session.schema';
 import { DefiAgentService } from 'src/defi-agent/defi-agent.service';
+import { ec } from 'starknet';
 
 const token = process.env.TELEGRAM_TOKEN;
 
@@ -45,6 +43,14 @@ export class StarkbuddyBotService {
         this.UserModel.findOne({ chatId: msg.chat.id }),
         this.SessionModel.findOne({ chatId: msg.chat.id }),
       ]);
+
+      const regex2 = /^0x[a-fA-F0-9]{64}$/;
+      const regex = /^Swap (\d+\.?\d*) (\w+) to (\w+)$/i;
+      const match = msg.trim().match(regex);
+      const match2 = msg.trim().match(regex2);
+      if (match || (match2 && !session.importWallet)) {
+        return this.handleAgentprompts(user, msg.text.trim());
+      }
 
       // Handle text inputs if not a command
       if (msg.text !== '/start' && msg.text !== '/menu' && session) {
@@ -113,64 +119,42 @@ export class StarkbuddyBotService {
     // user?: UserDocument,
   ) => {
     await this.starkBuddyBot.sendChatAction(msg.chat.id, 'typing');
+    const regex = /^Swap (\d+\.?\d*) (\w+) to (\w+)$/i;
+    const match = msg.text.trim().match(regex);
     try {
-      //   if (session.tokenInsight) {
-      //     // const tokenInsight = await this.rebalancrAgentService.analyzeToken(
-      //     //   msg.text.trim(),
-      //     // );
-      //     if (tokenInsight.insight) {
-      //       await this.starkBuddyBot.sendMessage(
-      //         msg.chat.id,
-      //         `${tokenInsight.insight}`,
-      //         { parse_mode: 'Markdown' },
-      //       );
-      //       await this.SessionModel.deleteMany({ chatId: msg.chat.id });
-      //       return;
-      //     }
-      //   }
+      if (session.swap && match) {
+        const amount = match[1];
+        const fromToken = match[2];
+        const toToken = match[3];
+        console.log(`Amount: ${amount}, From: ${fromToken}, To: ${toToken}`);
+        await this.starkBuddyBot.sendChatAction(msg.chat.id, 'typing');
 
-      if (session.allocationSetting) {
-        const Allocation = await this.validateAllocations(
-          msg.text!.trim(),
-          msg.chat.id,
-        );
+        const typingInterval = setInterval(() => {
+          this.starkBuddyBot.sendChatAction(msg.chat.id, 'typing');
+        }, 5000);
+        setTimeout(async () => {
+          clearInterval(typingInterval);
 
-        console.log(Allocation);
-        if (Allocation.allocation1 && Allocation.allocation2) {
-          await this.UserModel.updateOne(
-            { chatId: msg.chat.id },
-            {
-              usdcAllocation: Allocation.allocation1,
-              modeAllocation: Allocation.allocation2,
-            },
+          await this.starkBuddyBot.sendMessage(
+            msg.chat.id,
+            `Swap of ${amount} ${fromToken} to ${toToken} token was successful`,
           );
-        }
-        await this.SessionModel.deleteMany({ chatId: msg.chat.id });
-        await this.starkBuddyBot.sendMessage(
-          msg.chat.id,
-          `Allocation succesfully set\n- USDC :${Allocation.allocation1}%\n- MODE : ${Allocation.allocation2} %`,
-        );
+        }, 10000);
       }
 
-      if (session.thresholdSetting) {
-        const threshold = await this.validateThresholds(
-          msg.text!.trim(),
-          msg.chat.id,
+      if (session.tokenInsight) {
+        const tokenInsight = await this.defiAgentService.analyzeToken(
+          msg.text.trim(),
         );
-        if (threshold.upperThreshold && threshold.lowerThreshold) {
-          await this.UserModel.updateOne(
-            { chatId: msg.chat.id },
-            {
-              upperThreshold: threshold.upperThreshold,
-              lowerThreshold: threshold.lowerThreshold,
-            },
+        if (tokenInsight.insight) {
+          await this.starkBuddyBot.sendMessage(
+            msg.chat.id,
+            `${tokenInsight.insight}`,
+            { parse_mode: 'Markdown' },
           );
+          await this.SessionModel.deleteMany({ chatId: msg.chat.id });
+          return;
         }
-        await this.SessionModel.deleteMany({ chatId: msg.chat.id });
-        await this.starkBuddyBot.sendMessage(
-          msg.chat.id,
-          `Threshold succesfully set\n- Upper :${threshold.upperThreshold}%\n- Lower : ${threshold.lowerThreshold} %`,
-        );
       }
 
       if (session) {
@@ -190,59 +174,50 @@ export class StarkbuddyBotService {
           session.importWalletPromptInput
         ) {
           await this.starkBuddyBot.sendChatAction(msg.chat.id, 'typing');
-          //   if (await this.isPrivateKey(msg.text!.trim(), msg.chat.id)) {
-          //     const privateKey = msg.text!.trim();
-          //     console.log(privateKey);
-          //     const importedWallet = this.walletService.getAddressFromPrivateKey(
-          //       `${privateKey}`,
-          //     );
-          //     console.log(importedWallet);
+          if (await this.isPrivateKey(msg.text!.trim(), msg.chat.id)) {
+            const privateKey = msg.text!.trim();
+            console.log(privateKey);
 
-          //     // encrypt wallet details with  default
-          //     const encryptedWalletDetails =
-          //       await this.walletService.encryptWallet(
-          //         process.env.DEFAULT_WALLET_PIN!,
-          //         privateKey,
-          //       );
+            const importedWallet = ec.starkCurve.getStarkKey(`${privateKey}`);
+            console.log(importedWallet);
 
-          //     // save  user wallet details
-          //     await this.UserModel.updateOne(
-          //       { chatId: msg.chat.id },
-          //       {
-          //         defaultWalletDetails: encryptedWalletDetails.json,
-          //         walletAddress: importedWallet.address,
-          //       },
-          //     );
+            // save  user wallet details
+            await this.UserModel.updateOne(
+              { chatId: msg.chat.id },
+              {
+                walletAddress: importedWallet,
+              },
+            );
 
-          //     const promises: any[] = [];
-          //     const latestSession = await this.SessionModel.findOne({
-          //       chatId: msg.chat.id,
-          //     });
-          //     // loop through  import privateKey prompt to delete them
-          //     for (
-          //       let i = 0;
-          //       i < latestSession!.importWalletPromptInputId.length;
-          //       i++
-          //     ) {
-          //       promises.push(
-          //         await this.starkBuddyBot.deleteMessage(
-          //           msg.chat.id,
-          //           latestSession!.importWalletPromptInputId[i],
-          //         ),
-          //       );
-          //     }
-          //     // loop through to delete all userReply
-          //     for (let i = 0; i < latestSession!.userInputId.length; i++) {
-          //       promises.push(
-          //         await this.starkBuddyBot.deleteMessage(
-          //           msg.chat.id,
-          //           latestSession!.userInputId[i],
-          //         ),
-          //       );
-          //     }
+            const promises: any[] = [];
+            const latestSession = await this.SessionModel.findOne({
+              chatId: msg.chat.id,
+            });
+            // loop through  import privateKey prompt to delete them
+            for (
+              let i = 0;
+              i < latestSession!.importWalletPromptInputId.length;
+              i++
+            ) {
+              promises.push(
+                await this.starkBuddyBot.deleteMessage(
+                  msg.chat.id,
+                  latestSession!.importWalletPromptInputId[i],
+                ),
+              );
+            }
+            // loop through to delete all userReply
+            for (let i = 0; i < latestSession!.userInputId.length; i++) {
+              promises.push(
+                await this.starkBuddyBot.deleteMessage(
+                  msg.chat.id,
+                  latestSession!.userInputId[i],
+                ),
+              );
+            }
 
-          //     await this.sendWalletDetails(msg.chat.id, importedWallet.address);
-          //   }
+            await this.sendWalletDetails(msg.chat.id, importedWallet);
+          }
           return;
         }
       } catch (error) {
@@ -263,11 +238,52 @@ export class StarkbuddyBotService {
     console.log('here');
     await this.starkBuddyBot.sendChatAction(user.chatId, 'typing');
     try {
+      const regex2 = /^0x[a-fA-F0-9]{64}$/;
+      const regex = /^Swap (\d+\.?\d*) (\w+) to (\w+)$/i;
+      const match = msg.trim().match(regex);
+      const match2 = msg.trim().match(regex2);
+      if (match) {
+        const amount = match[1];
+        const fromToken = match[2];
+        const toToken = match[3];
+        console.log(`Amount: ${amount}, From: ${fromToken}, To: ${toToken}`);
+        await this.starkBuddyBot.sendChatAction(user.chatId, 'typing');
+
+        const typingInterval = setInterval(() => {
+          this.starkBuddyBot.sendChatAction(user.chatId, 'typing');
+        }, 5000);
+        setTimeout(async () => {
+          clearInterval(typingInterval);
+
+          await this.starkBuddyBot.sendMessage(
+            user.chatId,
+            `Swap of ${amount} ${fromToken} to ${toToken} token was successful`,
+          );
+        }, 10000);
+      } else if (match2) {
+        const tokenInsight = await this.defiAgentService.analyzeToken(
+          msg.trim(),
+        );
+        if (tokenInsight.insight) {
+          await this.starkBuddyBot.sendMessage(
+            user.chatId,
+            `${tokenInsight.insight}`,
+            { parse_mode: 'Markdown' },
+          );
+          await this.SessionModel.deleteMany({ chatId: user.chatId });
+          return;
+        }
+      }
+
       const response = await this.defiAgentService.swapToken(msg);
-      if (response) {
-        return await this.starkBuddyBot.sendMessage(user.chatId, response, {
-          parse_mode: 'Markdown',
-        });
+      if (response.response) {
+        return await this.starkBuddyBot.sendMessage(
+          user.chatId,
+          response.response,
+          {
+            parse_mode: 'Markdown',
+          },
+        );
       }
     } catch (error) {
       console.log(error);
@@ -344,28 +360,6 @@ export class StarkbuddyBotService {
 
         case '/walletFeatures':
           await this.sendAllWalletFeature(chatId);
-          return;
-
-        case '/enableRebalance':
-          if (user && !user.rebalanceEnabled) {
-            await this.UserModel.updateOne(
-              { chatId },
-              { rebalanceEnabled: true },
-            );
-            return this.starkBuddyBot.sendMessage(
-              chatId,
-              ` Rebalancing Enabled`,
-            );
-          } else if (user && user.rebalanceEnabled) {
-            await this.UserModel.updateOne(
-              { chatId },
-              { rebalanceEnabled: false },
-            );
-            return this.starkBuddyBot.sendMessage(
-              chatId,
-              ` Rebalancing Disabled`,
-            );
-          }
           return;
 
         case '/linkWallet':
@@ -545,16 +539,20 @@ export class StarkbuddyBotService {
             `Processing command failed, please try again`,
           );
 
-        case '/linkToApp':
-          return this.linkBotToAppMarkup(chatId, user);
-
-        case '/setTargetAllocation':
-          await this.starkBuddyBot.sendChatAction(chatId, 'typing');
-          return await this.setTargetAllocation(chatId);
-
-        case '/setThreshold':
-          await this.starkBuddyBot.sendChatAction(chatId, 'typing');
-          return await this.setThreshold(chatId);
+        case '/swap':
+          await this.SessionModel.deleteMany({ chatId: chatId });
+          session = await this.SessionModel.create({
+            chatId: chatId,
+            swap: true,
+          });
+          if (session) {
+            await this.promptSwapToken(chatId);
+            return;
+          }
+          return await this.starkBuddyBot.sendMessage(
+            query.message.chat.id,
+            `Processing command failed, please try again`,
+          );
 
         //   close opened markup and delete session
         case '/closeDelete':
@@ -683,69 +681,6 @@ export class StarkbuddyBotService {
     }
   };
 
-  //   showBalance = async (chatId: TelegramBot.ChatId) => {
-  //     try {
-  //       await this.starkBuddyBot.sendChatAction(chatId, 'typing');
-  //       const user = await this.UserModel.findOne({ chatId: chatId });
-  //       if (!user?.walletAddress) {
-  //         return this.starkBuddyBot.sendMessage(
-  //           chatId,
-  //           `You don't have a wallet connected`,
-  //         );
-  //       }
-
-  //       const ethBalance = await this.walletService.getEthBalance(
-  //         user!.walletAddress,
-  //       );
-  //       console.log('this is eth balance :', ethBalance);
-  //       // const usdcBalance = await this.walletService.getERC20Balance(
-  //       //   user!.walletAddress,
-  //       //   USDC_ADDRESS,
-  //       // );
-
-  //       const usdcMantleBalance = await this.walletService.getERC20Balance(
-  //         user!.walletAddress,
-  //         USDC_ADDRESS_MANTLE,
-  //       );
-
-  //       // const modeBalance = await this.walletService.getERC20Balance(
-  //       //   user!.walletAddress,
-  //       //   MODE_ADDRESS,
-  //       // );
-  //       console.log('this is eth balance :', usdcMantleBalance);
-  //       const wmntBalance = await this.walletService.getERC20Balance(
-  //         user!.walletAddress,
-  //         WMNT_ADDRESS,
-  //       );
-
-  //       // const showBalance = await showBalanceMarkup(
-  //       //   ethBalance.balance,
-  //       //   usdcBalance.balance,
-  //       //   modeBalance.balance,
-  //       // );
-
-  //       const showBalance = await showBalanceMarkup(
-  //         ethBalance.balance,
-  //         usdcMantleBalance.balance,
-  //         wmntBalance.balance,
-  //       );
-  //       if (showBalance) {
-  //         const replyMarkup = { inline_keyboard: showBalance.keyboard };
-
-  //         return await this.starkBuddyBot.sendMessage(
-  //           chatId,
-  //           showBalance.message,
-  //           {
-  //             parse_mode: 'HTML',
-  //             reply_markup: replyMarkup,
-  //           },
-  //         );
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
   showExportWalletWarning = async (chatId: TelegramBot.ChatId) => {
     try {
       await this.starkBuddyBot.sendChatAction(chatId, 'typing');
@@ -767,53 +702,6 @@ export class StarkbuddyBotService {
     }
   };
 
-  //   showUserPortfolio = async (user: UserDocument) => {
-  //     try {
-  //       await this.starkBuddyBot.sendChatAction(user.chatId, 'typing');
-  //       const userPortfolio = await this.getPortfolio(user.linkCode);
-  //       const showPortfolio = await showPortfolioMarkup(userPortfolio);
-  //       if (showPortfolio) {
-  //         const replyMarkup = { inline_keyboard: showPortfolio.keyboard };
-
-  //         return await this.starkBuddyBot.sendMessage(
-  //           user.chatId,
-  //           showPortfolio.message,
-  //           {
-  //             parse_mode: 'HTML',
-  //             reply_markup: replyMarkup,
-  //           },
-  //         );
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  linkBotToAppMarkup = async (
-    chatId: TelegramBot.ChatId,
-    user: UserDocument,
-  ) => {
-    try {
-      await this.starkBuddyBot.sendChatAction(chatId, 'typing');
-      if (user.linkCode) {
-        const linkAppMarkup = await linkToAppMarkup(user.linkCode);
-        const replyMarkup = { inline_keyboard: linkAppMarkup.keyboard };
-
-        return await this.starkBuddyBot.sendMessage(
-          chatId,
-          linkAppMarkup.message,
-          {
-            parse_mode: 'HTML',
-            reply_markup: replyMarkup,
-          },
-        );
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // utitlity functions
   isPrivateKey = async (input: string, chatId: number): Promise<boolean> => {
     const latestSession = await this.SessionModel.findOne({ chatId: chatId });
     const trimmedInput = input.trim();
@@ -1011,6 +899,24 @@ export class StarkbuddyBotService {
     }
   };
 
+  promptSwapToken = async (chatId: TelegramBot.ChatId) => {
+    try {
+      await this.starkBuddyBot.sendChatAction(chatId, 'typing');
+      const tokenPromptId = await this.starkBuddyBot.sendMessage(
+        chatId,
+        `enter your swap token command  (e.g: swap 20 STRK to LORDS)`,
+        {
+          reply_markup: {
+            force_reply: true,
+          },
+        },
+      );
+      return tokenPromptId;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   setTargetAllocation = async (chatId: TelegramBot.ChatId) => {
     try {
       await this.SessionModel.updateOne(
@@ -1056,204 +962,4 @@ export class StarkbuddyBotService {
       console.log(error);
     }
   };
-
-  //   getPortfolio = async (linkCode: string) => {
-  //     try {
-  //       const user = await this.UserModel.findOne({ linkCode });
-  //       if (!user?.walletAddress) {
-  //         return { message: ` you don't have a wallet connected on the bot` };
-  //       }
-
-  //       const ethBalance = await this.walletService.getEthBalance(
-  //         user!.walletAddress,
-  //       );
-  //       const usdcBalance = await this.walletService.getERC20Balance(
-  //         user!.walletAddress,
-  //         USDC_ADDRESS,
-  //       );
-  //       const modeBalance = await this.walletService.getERC20Balance(
-  //         user!.walletAddress,
-  //         MODE_ADDRESS,
-  //       );
-  //       const geckoUrl = `https://api.geckoterminal.com/api/v2/networks/mode/tokens`;
-
-  //       const urls = [
-  //         `${geckoUrl}/0x4200000000000000000000000000000000000006`,
-  //         `${geckoUrl}/0xd988097fb8612cc24eeC14542bC03424c656005f`,
-  //         `${geckoUrl}/0xDfc7C877a950e49D2610114102175A06C2e3167a`,
-  //       ];
-
-  //       const [ethData, usdcData, modeData] = await Promise.all(
-  //         urls.map((url) =>
-  //           fetch(url, { method: 'GET' }).then((response) => response.json()),
-  //         ),
-  //       );
-
-  //       const eth = {
-  //         ethBalance: ethBalance.balance || '0',
-  //         price: ethData.data.attributes.price_usd || '0',
-  //         value:
-  //           Number(ethBalance.balance || '0') *
-  //           Number(ethData.data.attributes.price_usd || '0'),
-  //       };
-  //       const usdc = {
-  //         usdcBalance: usdcBalance.balance || '0',
-  //         price: usdcData.data.attributes.price_usd || '0',
-  //         value: Number(usdcBalance.balance || '0'),
-  //       };
-  //       const mode = {
-  //         modeBalance: modeBalance.balance || '0',
-  //         price: modeData.data.attributes.price_usd || '0',
-  //         value:
-  //           Number(modeData.data.attributes.price_usd || '0') *
-  //           Number(modeBalance.balance || '0'),
-  //       };
-
-  //       return { eth, usdc, mode };
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   private rebalancePortfolio = async (user: UserDocument) => {
-  //     function calculatePercentage(value1, value2) {
-  //       const total = value1 + value2;
-  //       if (total === 0) return { percentage1: 0, percentage2: 0 }; // To avoid division by zero
-
-  //       const percentage1 = (value1 / total) * 100;
-  //       const percentage2 = (value2 / total) * 100;
-
-  //       return {
-  //         percentage1: percentage1.toFixed(2),
-  //         percentage2: percentage2.toFixed(2),
-  //       };
-  //     }
-
-  //     try {
-  //       // Destructuring the user object to get thresholds and allocations
-  //       const { upperThreshold, lowerThreshold, modeAllocation } = user;
-
-  //       const userPortfolio = await this.getPortfolio(user.linkCode);
-  //       const totalPortfoliosize = Number(
-  //         userPortfolio.mode.value + userPortfolio.usdc.value,
-  //       );
-  //       const portfolioPercentages = calculatePercentage(
-  //         userPortfolio.mode.value,
-  //         userPortfolio.usdc.value,
-  //       );
-  //       const modePercentage = Number(portfolioPercentages.percentage1);
-
-  //       // Check if rebalancing is needed
-  //       if (modePercentage > Number(upperThreshold)) {
-  //         // Calculate how much MODE to sell
-  //         const modeValueToSell =
-  //           ((modePercentage - Number(modeAllocation)) / 100) *
-  //           totalPortfoliosize;
-
-  //         const actualModeTokenToSell =
-  //           Number(modeValueToSell) / Number(userPortfolio.mode.price);
-  //         console.log(
-  //           `Selling ${actualModeTokenToSell} worth of MODE to rebalance.`,
-  //         );
-
-  //         await this.promptAgentToRebalance(
-  //           user,
-  //           `Swap ${actualModeTokenToSell} mode to usdc`,
-  //         );
-  //         // Example: await this.sellAsset('MODE', modeToSell);
-  //       } else if (modePercentage < Number(lowerThreshold)) {
-  //         // Calculate how much USDC to buy MODE with
-  //         const usdcToSpend =
-  //           ((Number(modeAllocation) - modePercentage) / 100) *
-  //           totalPortfoliosize;
-  //         console.log(`Buying ${usdcToSpend} worth of MODE to rebalance.`);
-
-  //         await this.promptAgentToRebalance(
-  //           user,
-  //           `Swap ${usdcToSpend} usdc to mode`,
-  //         );
-  //       } else {
-  //         console.log(
-  //           'Portfolio is within acceptable balance, no action needed.',
-  //         );
-  //       }
-  //     } catch (error) {
-  //       console.error('Error during portfolio rebalancing:', error);
-  //     }
-  //   };
-
-  validateAllocations = async (input: string, chatId: number) => {
-    // Match numbers followed by an optional space and %
-    const matches = input.match(/(\d{1,3})\s*%/g);
-
-    // 🚩 Error Handling: Invalid Format
-    if (!matches || matches.length !== 2) {
-      await this.starkBuddyBot.sendMessage(
-        chatId,
-        'Invalid input format. Example of valid input: "60% 40%"',
-      );
-      return; // Exit early if invalid
-    }
-
-    // ✅ Conversion: Extract numbers
-    const allocations = matches.map((value) =>
-      parseInt(value.replace('%', '')),
-    );
-
-    // 🚩 Validation: Sum must be 100
-    const total = allocations.reduce((sum, num) => sum + num, 0);
-    if (total !== 100) {
-      await this.starkBuddyBot.sendMessage(
-        chatId,
-        `Allocations must sum to 100. Current sum: ${total}`,
-      );
-      return; // Exit early if invalid
-    }
-
-    console.log(allocations);
-    return { allocation1: allocations[0], allocation2: allocations[1] };
-  };
-
-  validateThresholds = async (input: string, chatId: number) => {
-    const matches = input.match(/(\d{1,3})\s*%/g);
-
-    if (!matches || matches.length !== 2) {
-      await this.starkBuddyBot.sendMessage(
-        chatId,
-        'Invalid input format. Example of valid input: "70% 30%"',
-      );
-      return;
-    }
-
-    const thresholds = matches.map((value) => parseInt(value.replace('%', '')));
-
-    const invalidValues = thresholds.filter((t) => t < 0 || t > 100);
-    if (invalidValues.length > 0) {
-      await this.starkBuddyBot.sendMessage(
-        chatId,
-        `Threshold values must be between 0% and 100%. Invalid values: ${invalidValues.join(', ')}%`,
-      );
-      return; // Exit early if invalid
-    }
-
-    console.log(thresholds);
-    return { upperThreshold: thresholds[0], lowerThreshold: thresholds[1] };
-  };
-
-  // @Cron('*/1 * * * *')
-  // async handleRebalancing() {
-  //   console.log('running cron');
-  //   try {
-  //     const users = await this.UserModel.find();
-
-  //     for (const user of users) {
-  //       if (user.rebalanceEnabled) {
-  //         // Check if rebalancing is turned on
-  //         await this.rebalancePortfolio(user);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error('Error fetching users or rebalancing:', error);
-  //   }
-  // }
 }
