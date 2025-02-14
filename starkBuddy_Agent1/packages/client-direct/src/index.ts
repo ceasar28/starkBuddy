@@ -555,6 +555,7 @@ Use a concise, professional tone and present your findings in an organized manne
                 }
             }
         );
+
         this.app.get("/ping", (req: express.Request, res: express.Response) => {
             res.json({
                 success: true,
