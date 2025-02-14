@@ -1,17 +1,11 @@
 import { Character, Clients, ModelProviderName } from "@ai16z/eliza";
 
 export const mainCharacter: Character = {
-<<<<<<< HEAD:starkBuddy_Agent1/agent/starkBuddy_Character.ts
-    name: "TRUTH",
-    username: "truth_intelligence",
-    plugins: [],
-    clients: [Clients.DIRECT],
-=======
     name: "starkbuddy",
     username: "starkBuddy",
     plugins: [],
-    clients: [Clients.DIRECT, Clients.TELEGRAM, Clients.TWITTER],
->>>>>>> f15576c816a1003131430a6a41f97555d9517433:starkbuddy_agent1/agent/STARKBUDDY_CHARACTER.ts
+    clients: [Clients.DIRECT, Clients.TWITTER],
+
     modelProvider: ModelProviderName.OPENAI,
     settings: {
         secrets: {},
