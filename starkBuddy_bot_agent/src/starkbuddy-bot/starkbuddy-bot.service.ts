@@ -46,8 +46,8 @@ export class StarkbuddyBotService {
 
       const regex2 = /^0x[a-fA-F0-9]{64}$/;
       const regex = /^Swap (\d+\.?\d*) (\w+) to (\w+)$/i;
-      const match = msg.trim().match(regex);
-      const match2 = msg.trim().match(regex2);
+      const match = msg.text.trim().match(regex);
+      const match2 = msg.text.trim().match(regex2);
       if (match || (match2 && !session.importWallet)) {
         return this.handleAgentprompts(user, msg.text.trim());
       }
