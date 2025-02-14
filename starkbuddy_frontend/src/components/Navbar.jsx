@@ -3,7 +3,7 @@ import { FaTwitter, FaTelegram } from "react-icons/fa";
 
 const Navbar = () => {
     return (
-        <nav className="flex flex-wrap items-center justify-between px-4 py-4 md:px-6 md:py-6">
+        <nav id="top-navbar" className="flex flex-wrap items-center justify-between px-4 py-4 md:px-6 md:py-6">
             {/* Logo and Text */}
             <div className="flex items-center">
                 <img

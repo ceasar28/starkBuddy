@@ -100,7 +100,7 @@ const PageTemplate = ({ title, placeholder, endpoint, generatePayload, formatRep
               <Message key={index} type={message.type} text={message.text} />
             ))}
             {/* Show loading indicator while awaiting response */}
-            {isLoading && <Message type="system" text="Typing..." />}
+            {isLoading && <Message type="system" text="Processing your message..." />}
             <div ref={chatEndRef} />
           </div>
 
